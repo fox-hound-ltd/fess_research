@@ -33,6 +33,15 @@ brew install docker
 docker-compose up
 ```
 
+fessサーバーに入る場合は以下
+
+```bash
+# CONTAINER IDを調べる
+docker ps
+# docker execで入る
+docker exec -it {CONTAINER ID} bash
+```
+
 fessサーバーが立ち上がるので、ホスト側からは`0.0.0.0:8080/login`でアクセスできる。
 
 ### CentOS上に構築
