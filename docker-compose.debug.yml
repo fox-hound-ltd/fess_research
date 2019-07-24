@@ -1,0 +1,13 @@
+version: '2.1'
+
+services:
+  fess_research:
+    image: fess_research
+    build: .
+    environment:
+      JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y
+    ports:
+      - 8080:8080/tcp
+      - 9200:9200/tcp
+      - 9300:9300/tcp
+
