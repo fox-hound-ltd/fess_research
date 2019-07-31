@@ -79,6 +79,29 @@ fessサーバーが立ち上がるので、ホスト側からは`0.0.0.0:8080/lo
 | RUN_ELASTICSEARCH    | Elasticsearchを起動するか、 `true` or `false`。初期値は`true`                                                                                                             |
 | RUN_SHELL            | 起動チェックを行うかどうか、 `true` or `false`。初期値は`true`                                                                                                            |
 
+## ログ関連
+
+`fess`、`Elasticsearch`ともに`/var/log/(fess|Elasticsearch)`内に`log`または`json`ファイルがあります。
+
+### 一括で見る
+
+```bash
+tail -f /var/log/fess/*.log
+tail -f /var/log/elasticsearch/*.log /var/log/elasticsearch/*.json
+```
+
+### ログファイルの説明
+
+| ファイル             | 説明                                     |
+| -------------------- | ---------------------------------------- |
+| `fess.log`           | fessアプリケーション本体のログ           |
+| `fess-crawler.log`   | fessクローラーの実行ログ                 |
+| `fess-suggest.log`   | fessサジェスト作成ログ                   |
+| `fess-thumbnail.log` | fessサムネイル作成ログ                   |
+| `audit.log`          | fessログイン情報や管理画面のアクセスログ |
+| `elasticsearch.log`  | Elasticsearchアプリケーションログ        |
+| `elasticsearch_*_slowlog.log` | 何かしら、処理が遅くなったもののログ|
+
 ## 関連・補足
 
 `/login`の初期ユーザー名/パスワードは、 admin/admin です。
