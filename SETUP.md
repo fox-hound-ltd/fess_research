@@ -8,7 +8,7 @@
 構築するサーバーの想定は、以下となっています。
 
 - OS: CentOS6
-- ElasticSearchが導入済み
+- Elasticsearchが導入済み
 
 ## 導入するライブラリ等のバージョン
 
@@ -67,7 +67,7 @@ wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-
 
 ### グループ、ユーザーの定義
 
-サーバーに、`fess`, `ElasticSearch` 用のグループユーザを追加する。
+サーバーに、`fess`, `Elasticsearch` 用のグループユーザを追加する。
 
 ```bash
 groupadd -g 1000 elasticsearch && \
@@ -76,22 +76,22 @@ groupadd -g 1000 elasticsearch && \
     useradd -u 1001 fess -g fess
 ```
 
-### ElasticSearchのインストール (旧ElasticSearchのアンインストール)
+### Elasticsearchのインストール (旧Elasticsearchのアンインストール)
 
-旧ElasticSearchが `yum` または `rpm` で導入されていた場合は、それぞれのアンインストールコマンドでアンインストールを行ってください。
+旧Elasticsearchが `yum` または `rpm` で導入されていた場合は、それぞれのアンインストールコマンドでアンインストールを行ってください。
 
 ```bash
 yum uninstall elasticsearch
 rpm -e elasticsearch
 ```
 
-Javaと同様、 `yum` で導入できるElasticSearchはバージョンが古いので、 `wget` で導入します。
+Javaと同様、 `yum` で導入できるElasticsearchはバージョンが古いので、 `wget` で導入します。
 
 ```bash
 wget --progress=dot:mega https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-7.2.0-x86_64.rpm -O /tmp/elasticsearch-7.2.0.rpm && \
     rpm -i /tmp/elasticsearch-7.2.0.rpm && \
     rm -rf /tmp/elasticsearch-7.2.0.rpm && \
-    # ElasticSearchが使うJavaを先述したJavaに設定する
+    # Elasticsearchが使うJavaを先述したJavaに設定する
     echo "JAVA_HOME=${JAVA_HOME}" >> /etc/default/elasticsearch
 ```
 
@@ -116,7 +116,7 @@ wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-
     mv apache-ant-1.10.5 /usr/share/ant
 ```
 
-### fessプラグインをElasticSearchにインストール
+### fessプラグインをElasticsearchにインストール
 
 `ant` を使って`fess`内の `plugin.xml` に記載されているプラグインをインストールする。それに合わせて、fessのオプション定数、起動スクリプトを更新。
 
@@ -141,7 +141,7 @@ echo "ln -sf ${JAVA_HOME}/bin/java /usr/bin/java" >> ~/.bash_profile
 ### このリポジトリの設定、起動スクリプトのファイルをコピー、設置する
 
 ```bash
-# ElasticSearchのconfigを設置
+# Elasticsearchのconfigを設置
 cp ./elasticsearch/config/* /etc/elasticsearch
 
 # elasticsearch配下の権限付与
@@ -158,13 +158,13 @@ chown root:fess /usr/share/fess/* && chmod a+x /usr/share/fess/run.sh
 
 ## サーバーの立ち上げ
 
-起動スクリプトを実行することで、`fess` および `ElasticSearch` が起動されます。デフォルトの公開ポート設定は以下のようになっています。
+起動スクリプトを実行することで、`fess` および `Elasticsearch` が起動されます。デフォルトの公開ポート設定は以下のようになっています。
 
 | name                  | port |
 | --------------------- | ---- |
 | fess                  | 8080 |
-| ElasticSearch         | 9200 |
-| ElasticSearch(Export) | 9300 |
+| Elasticsearch         | 9200 |
+| Elasticsearch(Export) | 9300 |
 
 サーバーを立ち上げられたら、`nginx` なりで外部公開を行ってください。
 `localhost:8080/login`にアクセスすると、管理者ログイン画面が表示されるので　`ID admin / PW admin` で管理者画面にアクセスすることができるので、適宜クローリング設定を行い、動作確認をお願いします。
