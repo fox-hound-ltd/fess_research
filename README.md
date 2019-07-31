@@ -77,7 +77,7 @@ fessサーバーが立ち上がるので、ホスト側からは`0.0.0.0:8080/lo
 | PING_INTERVAL        | 起動チェックの際に、連続してPingする時のインターバル。初期値は`3`                                                                                                         |
 | RUN_FESS             | fessを起動するか、`true` or `false`。初期値は`true`                                                                                                                       |
 | RUN_ELASTICSEARCH    | Elasticsearchを起動するか、 `true` or `false`。初期値は`true`                                                                                                             |
-| RUN_SHELL            | 起動チェックを行うかどうか、 `true` or `false`。初期値は`true`                                                                                                            |
+| RUN_SHELL            | シェルに復帰するかどうか、`true` or `false`。初期値は`false`。`false`だと起動チェック、log出力のプロセスが動き続ける。                                                    |
 
 ## ログ関連
 
