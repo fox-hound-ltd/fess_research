@@ -57,6 +57,28 @@ fessサーバーが立ち上がるので、ホスト側からは`0.0.0.0:8080/lo
 
 [setup.sh](setup.sh)を参考にしてください。
 
+## 起動スクリプト run.sh について
+
+このスクリプトは、大きく以下3つの処理に別れています。
+
+1. fessの起動
+2. ElasticSearchの起動
+3. 両者の起動チェック
+
+実行時に、変数を渡すことで制御が可能となっています。変数と制御の関係は以下の表の通りになっています。
+
+| 変数                 | 制御内容等                                                                          |
+| -------------------- | ----------------------------------------------------------------------------------- |
+| FESS_DICTIONARY_PATH | fessが辞書データを参照するパスを設定する。初期値は`/var/lib/elasticsearch/config`   |
+| ES_HTTP_URL          | 起動チェックの際に、ElasticSearchへPingを行うURL。初期値は`localhost:9200`          |
+| ES_TRANSPORT_URL     | 起動チェックの際に、ElasticSearchTransportへPingを行うURL。初期値は`localhost:9300` |
+| ES_JAVA_OPTS         | ElasticSearchに対するJVMオプション。[Setting JVM options - Elasticsearch Reference 7.2](https://www.elastic.co/guide/en/elasticsearch/reference/current/jvm-options.html) |  |
+| PING_RETRIES         | 起動チェックの際のリトライ回数。初期値は `50`                                       |
+| PING_INTERVAL        | 起動チェックの際に、連続してPingする時のインターバル。初期値は`3`                   |
+| RUN_FESS             | fessを起動するか、`true` or `false`。初期値は`true`                                 |
+| RUN_ELASTICSEARCH    | ElasticSearchを起動するか、 `true` or `false`。初期値は`true`                       |
+| RUN_SHELL            | 起動チェックを行うかどうか、 `true` or `false`。初期値は`true`                      |
+
 ## 関連・補足
 
 `/login`の初期ユーザー名/パスワードは、 admin/admin です。

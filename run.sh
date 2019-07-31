@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo $PATH
-echo $JAVA_HOME
 ES_LOGFILE=/var/log/elasticsearch/elasticsearch.log
 
 if [ x"$FESS_DICTIONARY_PATH" != "x" ] ; then
@@ -68,7 +66,7 @@ start_fess() {
 wait_app() {
   while [ 1 ] ; do
     if [ x"$RUN_ELASTICSEARCH" != "xfalse" ] ; then
-      STATUS=`curl -w '%{http_code}\n' -s -o /dev/null http://localhost:9200`
+      STATUS=`curl -w '%{http_code}\n' -s -o /dev/null $ES_HTTP_URL`
       if [ x"$STATUS" = x200 ] ; then
         ELASTICSEARCH_ERROR_COUNT=0
       else
